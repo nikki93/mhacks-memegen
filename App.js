@@ -6,26 +6,37 @@ import {
   View,
   TouchableOpacity,
   Image,
+  TextInput,
 } from 'react-native';
 
 export default class App extends React.Component {
   state = {
     imgUri: 'https://imgflip.com/s/meme/Philosoraptor.jpg',
+    topText: '',
+    bottomText: '',
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => this.setState({ topText: text })}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={(text) => this.setState({ bottomText: text })}
+        />
         <View>
           <Image
             style={{ width: 300, height: 300 }}
             source={{ uri: this.state.imgUri }}
           />
           <Text style={[styles.text, { top: 5 }]}>
-            hello, world
+            {this.state.topText}
           </Text>
           <Text style={[styles.text, { bottom: 5 }]}>
-            hello, world
+            {this.state.bottomText}
           </Text>
         </View>
         <TouchableOpacity
@@ -49,6 +60,14 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 5,
+    padding: 5,
+    alignSelf: 'stretch',
+  },
   text: {
     position: 'absolute',
     left: 5, right: 5,
@@ -70,9 +89,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ddd',
   },
   container: {
+    marginTop: Expo.Constants.statusBarHeight,
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
