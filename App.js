@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  CameraRoll,
 } from 'react-native';
 
 export default class App extends React.Component {
@@ -27,7 +28,7 @@ export default class App extends React.Component {
           style={styles.input}
           onChangeText={(text) => this.setState({ bottomText: text })}
         />
-        <View>
+        <View ref={(ref) => this.memeView = ref}>
           <Image
             style={{ width: 300, height: 300 }}
             source={{ uri: this.state.imgUri }}
@@ -39,11 +40,18 @@ export default class App extends React.Component {
             {this.state.bottomText}
           </Text>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={this._onTakePic}>
-          <Text style={styles.buttonText}>take a pic!</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this._onTakePic}>
+            <Text style={styles.buttonText}>take a pic!</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={this._onSave}>
+            <Text style={styles.buttonText}>save!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -56,6 +64,11 @@ export default class App extends React.Component {
     if (!cancelled) {
       this.setState({ imgUri: uri });
     }
+  }
+
+  _onSave = async () => {
+    const uri = await Expo.takeSnapshotAsync(this.memeView, {});
+    await CameraRoll.saveToCameraRoll(uri);
   }
 }
 
