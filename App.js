@@ -16,10 +16,18 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          style={{ width: 300, height: 300 }}
-          source={{ uri: this.state.imgUri }}
-        />
+        <View>
+          <Image
+            style={{ width: 300, height: 300 }}
+            source={{ uri: this.state.imgUri }}
+          />
+          <Text style={[styles.text, { top: 5 }]}>
+            hello, world
+          </Text>
+          <Text style={[styles.text, { bottom: 5 }]}>
+            hello, world
+          </Text>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={this._onTakePic}>
@@ -41,6 +49,18 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    position: 'absolute',
+    left: 5, right: 5,
+    color: 'white',
+    backgroundColor: 'transparent',
+    fontSize: 28,
+    fontWeight: '900',
+    textAlign: 'center',
+    textShadowColor: 'black',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+  },
   buttonText: {
     fontSize: 21,
   },
