@@ -4,12 +4,17 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={{ width: 300, height: 300 }}
+          source={{ uri: 'https://imgflip.com/s/meme/Philosoraptor.jpg' }}
+        />
         <TouchableOpacity
           style={styles.button}
           onPress={() => console.log('hey!')}>
@@ -26,6 +31,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 5,
+    margin: 5,
     backgroundColor: '#ddd',
   },
   container: {
